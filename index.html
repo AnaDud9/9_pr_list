@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маршрутний лист: Одновимірні масиви</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            light: '#e0e7ff',
+                            DEFAULT: '#4f46e5',
+                            dark: '#3730a3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Додаткові стилі для плавних анімацій */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
+        /* Стилізація смуги прокрутки для блоків з кодом */
+        pre::-webkit-scrollbar {
+            height: 8px;
+        }
+        pre::-webkit-scrollbar-track {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        pre::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen pb-12">
+
+    <!-- Header / Hero Section -->
+    <header class="bg-gradient-to-br from-indigo-600 to-purple-700 text-white pt-16 pb-20 px-6 rounded-b-[3rem] shadow-lg mb-12 relative overflow-hidden">
+        <!-- Декоративні елементи фону -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none opacity-20">
+            <svg class="absolute top-[-20%] left-[-10%] w-96 h-96 fill-white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="50"/>
+            </svg>
+            <svg class="absolute bottom-[-20%] right-[-5%] w-64 h-64 fill-white" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" rx="20"/>
+            </svg>
+        </div>
+
+        <div class="max-w-4xl mx-auto relative z-10 text-center">
+            <div class="inline-block bg-white/20 backdrop-blur-md px-4 py-1.5 rounded-full text-sm font-semibold tracking-wider mb-4 border border-white/30">
+                🚀 Інформатика | 9 Клас
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                Приборкання даних. <br>
+                <span class="text-indigo-200">Одновимірні масиви</span>
+            </h1>
+            <p class="text-lg md:text-xl text-indigo-100 max-w-2xl mx-auto">
+                Привіт, програмісте! Сьогодні ти навчишся керувати великими обсягами даних так, як це роблять творці твоїх улюблених додатків. Твій маршрут складається з 4 зупинок. Поїхали!
+            </p>
+        </div>
+    </header>
+
+    <!-- Основний контент (Таймлайн) -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 relative">
+        
+        <!-- Лінія маршруту (Таймлайн) -->
+        <div class="absolute left-8 sm:left-10 top-0 bottom-0 w-1 bg-indigo-200 rounded-full z-0"></div>
+
+        <!-- Зупинка 1 -->
+        <section class="relative z-10 mb-16 group">
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-500 border-4 border-white shadow-md flex items-center justify-center text-white text-xl z-10 mt-1">
+                    📍
+                </div>
+                <div class="ml-6 flex-1 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 card-hover hover:shadow-md">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        Зупинка 1. Вступна 
+                        <span class="text-sm font-normal px-3 py-1 bg-blue-100 text-blue-700 rounded-full">Що таке масив?</span>
+                    </h2>
+                    <p class="text-slate-600 mb-4 leading-relaxed">
+                        Уяви, що тобі потрібно зберегти температуру повітря за кожен день року. Створювати 365 окремих змінних (<code class="bg-slate-100 px-1.5 py-0.5 rounded text-indigo-600 font-mono text-sm">t1, t2, t3...</code>) — це справжнє покарання!
+                    </p>
+                    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg">
+                        <p class="text-slate-700 font-medium">
+                            💡 <strong class="text-indigo-700">Одновимірний масив (у Python — список, list)</strong> — це ніби багатоповерховий будинок (або шафка в роздягальні), де під <strong>одним іменем</strong> зберігається багато значень, а кожне значення має свій порядковий номер (<strong>індекс</strong>).
+                        </p>
+                    </div>
+                    <div class="mt-4 flex items-start gap-3 bg-rose-50 p-4 rounded-lg">
+                        <span class="text-2xl">⚠️</span>
+                        <p class="text-rose-700 text-sm">
+                            <strong>Важливо пам'ятати:</strong> програмісти рахують з нуля! Тому найперший елемент масиву завжди має індекс <code class="bg-rose-100 px-1.5 py-0.5 rounded font-mono font-bold">0</code>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Зупинка 2 -->
+        <section class="relative z-10 mb-16 group">
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-500 border-4 border-white shadow-md flex items-center justify-center text-white text-xl z-10 mt-1">
+                    🛠️
+                </div>
+                <div class="ml-6 flex-1 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 card-hover hover:shadow-md">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-4">Зупинка 2. Теорія та реальне життя</h2>
+                    <p class="text-slate-600 mb-6">Як працювати з масивом? Ось основні команди (функції), які використовують розробники щодня.</p>
+                    
+                    <div class="space-y-4">
+                        <!-- Code Block 1 -->
+                        <div>
+                            <p class="font-semibold text-slate-700 mb-2">1. Створення масиву:</p>
+                            <p class="text-sm text-slate-500 mb-1">Кількість лайків під твоїми останніми 5 відео в TikTok.</p>
+                            <pre class="bg-slate-900 text-slate-50 p-4 rounded-xl font-mono text-sm overflow-x-auto border border-slate-700"><code><span class="text-blue-400">likes</span> = [<span class="text-orange-400">120</span>, <span class="text-orange-400">45</span>, <span class="text-orange-400">890</span>, <span class="text-orange-400">12</span>, <span class="text-orange-400">5</span>]</code></pre>
+                        </div>
+                        
+                        <!-- Code Block 2 -->
+                        <div>
+                            <p class="font-semibold text-slate-700 mb-2">2. Довжина масиву (кількість елементів):</p>
+                            <pre class="bg-slate-900 text-slate-50 p-4 rounded-xl font-mono text-sm overflow-x-auto border border-slate-700"><code><span class="text-yellow-300">len</span>(likes)  <span class="text-slate-400 italic"># Поверне 5</span></code></pre>
+                        </div>
+
+                        <!-- Code Block 3 -->
+                        <div>
+                            <p class="font-semibold text-slate-700 mb-2">3. Пошук відео, що "залетіло" в тренди (найбільше значення):</p>
+                            <pre class="bg-slate-900 text-slate-50 p-4 rounded-xl font-mono text-sm overflow-x-auto border border-slate-700"><code><span class="text-yellow-300">max</span>(likes)  <span class="text-slate-400 italic"># Поверне 890</span></code></pre>
+                        </div>
+
+                        <!-- Code Block 4 -->
+                        <div>
+                            <p class="font-semibold text-slate-700 mb-2">4. Загальна кількість лайків (сума):</p>
+                            <pre class="bg-slate-900 text-slate-50 p-4 rounded-xl font-mono text-sm overflow-x-auto border border-slate-700"><code><span class="text-yellow-300">sum</span>(likes)  <span class="text-slate-400 italic"># Додасть усі числа разом</span></code></pre>
+                        </div>
+
+                        <!-- Code Block 5 -->
+                        <div>
+                            <p class="font-semibold text-slate-700 mb-2">5. Додати нове відео в кінець списку:</p>
+                            <pre class="bg-slate-900 text-slate-50 p-4 rounded-xl font-mono text-sm overflow-x-auto border border-slate-700"><code>likes.<span class="text-yellow-300">append</span>(<span class="text-orange-400">300</span>)  <span class="text-slate-400 italic"># Масив стане: [120, 45, 890, 12, 5, 300]</span></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Зупинка 3 -->
+        <section class="relative z-10 mb-16">
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-pink-500 border-4 border-white shadow-md flex items-center justify-center text-white text-xl z-10 mt-1">
+                    💻
+                </div>
+                <div class="ml-6 flex-1 w-full">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 mb-6">
+                        <h2 class="text-2xl font-bold text-slate-800 mb-2">Зупинка 3. Практична робота</h2>
+                        <p class="text-slate-600">
+                            <strong>Твій виклик:</strong> Обери <span class="uppercase font-bold text-indigo-600 border-b-2 border-indigo-600">один</span> із трьох рівнів складності та напиши програму. Оціни свої сили та рухайся до мети!
+                        </p>
+                    </div>
+
+                    <!-- Картки рівнів -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        
+                        <!-- Рівень 1 -->
+                        <div class="bg-white rounded-2xl p-6 border-t-4 border-emerald-500 shadow-sm card-hover hover:shadow-emerald-100/50 flex flex-col h-full relative overflow-hidden">
+                            <div class="absolute top-0 right-0 bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-bl-lg">Базовий</div>
+                            <h3 class="text-lg font-bold text-slate-800 mb-2 mt-2">🟢 Рівень 1 <br><span class="text-emerald-600 text-xl">"Фітнес-трекер"</span></h3>
+                            <p class="text-sm text-slate-600 mb-4 flex-grow">
+                                Ти розробляєш додаток для годинника. Він записав кількість кроків за 5 днів робочого тижня.
+                            </p>
+                            <div class="mb-4">
+                                <p class="text-xs font-bold text-slate-500 uppercase mb-1">Дано масив:</p>
+                                <code class="bg-slate-100 px-2 py-1 rounded text-xs font-mono text-emerald-700 block text-center">steps = [8500, 12400, 6700, 9800, 14200]</code>
+                            </div>
+                            <ul class="text-sm text-slate-700 space-y-2 mb-4 list-disc pl-5">
+                                <li>Виведи загальну кількість кроків (<code class="font-mono text-xs text-indigo-600">sum</code>).</li>
+                                <li>Виведи найбільшу кількість кроків (<code class="font-mono text-xs text-indigo-600">max</code>).</li>
+                                <li>Виведи найменшу кількість кроків (<code class="font-mono text-xs text-indigo-600">min</code>).</li>
+                            </ul>
+                        </div>
+
+                        <!-- Рівень 2 -->
+                        <div class="bg-white rounded-2xl p-6 border-t-4 border-amber-500 shadow-sm card-hover hover:shadow-amber-100/50 flex flex-col h-full relative overflow-hidden">
+                            <div class="absolute top-0 right-0 bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-bl-lg">Середній</div>
+                            <h3 class="text-lg font-bold text-slate-800 mb-2 mt-2">🟡 Рівень 2 <br><span class="text-amber-600 text-xl">"Класний журнал"</span></h3>
+                            <p class="text-sm text-slate-600 mb-4 flex-grow">
+                                Ти пишеш систему аналітики для щоденника. Є список оцінок учня з інформатики.
+                            </p>
+                            <div class="mb-4">
+                                <p class="text-xs font-bold text-slate-500 uppercase mb-1">Дано масив:</p>
+                                <code class="bg-slate-100 px-2 py-1 rounded text-xs font-mono text-amber-700 block text-center break-all">grades = [8, 10, 7, 11, 12, 9, 6, 10]</code>
+                            </div>
+                            <ul class="text-sm text-slate-700 space-y-2 mb-4 list-disc pl-5">
+                                <li>Порахуй і виведи <strong>середній бал</strong> (сума / кількість).</li>
+                                <li>За допомогою циклу <code class="font-mono text-xs text-indigo-600">for</code> порахуй, скільки оцінок високого рівня (10, 11 або 12).</li>
+                            </ul>
+                        </div>
+
+                        <!-- Рівень 3 -->
+                        <div class="bg-white rounded-2xl p-6 border-t-4 border-rose-500 shadow-sm card-hover hover:shadow-rose-100/50 flex flex-col h-full relative overflow-hidden">
+                            <div class="absolute top-0 right-0 bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-bl-lg">Високий</div>
+                            <h3 class="text-lg font-bold text-slate-800 mb-2 mt-2">🔴 Рівень 3 <br><span class="text-rose-600 text-xl">"Чорна п'ятниця"</span></h3>
+                            <p class="text-sm text-slate-600 mb-4 flex-grow">
+                                Ти — розробник інтернет-магазину. В кошику лежать товари, але сьогодні розпродаж!
+                            </p>
+                            <div class="mb-4">
+                                <p class="text-xs font-bold text-slate-500 uppercase mb-1">Ціни (грн):</p>
+                                <code class="bg-slate-100 px-2 py-1 rounded text-xs font-mono text-rose-700 block text-center break-all">prices = [150, 3000, 45, 890, 1200, 15]</code>
+                            </div>
+                            <ul class="text-sm text-slate-700 space-y-2 mb-4 list-disc pl-5">
+                                <li>Використай цикл для перевірки кожної ціни.</li>
+                                <li>Якщо товар > 500 грн, зроби знижку 20% (<code class="font-mono text-xs text-indigo-600">ціна * 0.8</code>) у масиві.</li>
+                                <li>Виведи оновлений масив та нову суму до оплати.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Зупинка 4 -->
+        <section class="relative z-10 group">
+            <div class="flex items-start">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-teal-500 border-4 border-white shadow-md flex items-center justify-center text-white text-xl z-10 mt-1">
+                    🏕️
+                </div>
+                <div class="ml-6 flex-1 bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-slate-100 card-hover hover:shadow-md">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-4">Зупинка 4. Рефлексія (Привал)</h2>
+                    <p class="text-slate-600 mb-6">Ти чудово попрацював(ла)! Дай короткі відповіді на ці питання (усно або в коментарі до зданої роботи):</p>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex gap-4">
+                            <span class="text-2xl opacity-50">1️⃣</span>
+                            <p class="text-slate-700 font-medium pt-1">Який рівень завдання ти обрав(ла) і чому?</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex gap-4">
+                            <span class="text-2xl opacity-50">2️⃣</span>
+                            <p class="text-slate-700 font-medium pt-1">З яким індексом потрібно звернутись до масиву, щоб отримати його <strong class="text-indigo-600">перший</strong> елемент?</p>
+                        </div>
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex gap-4">
+                            <span class="text-2xl opacity-50">3️⃣</span>
+                            <p class="text-slate-700 font-medium pt-1">Де, на твою думку, у твоєму смартфоні програми використовують масиви (списки) просто зараз? <span class="text-slate-500 font-normal text-sm block mt-1">(Наведи 1-2 приклади).</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Завершення -->
+        <div class="mt-16 ml-14 text-center">
+            <div class="inline-flex items-center justify-center p-4 bg-indigo-50 rounded-full mb-4">
+                <span class="text-3xl">🏁</span>
+            </div>
+            <h3 class="text-xl font-bold text-slate-800">Кінець маршруту!</h3>
+            <p class="text-slate-500 mt-2">Не забудь зберегти свій код і надіслати вчителю.</p>
+        </div>
+
+    </main>
+
+</body>
+</html>
