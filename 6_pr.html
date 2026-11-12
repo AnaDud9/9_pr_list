@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота: Таблиці в текстовому документі</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        nunito: ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        pastel: {
+                            blue: '#e0f2fe',
+                            purple: '#f3e8ff',
+                            green: '#dcfce7',
+                            yellow: '#fef3c7',
+                            pink: '#fce7f3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hover-lift {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700 font-nunito antialiased min-h-screen pb-12">
+
+    <!-- Header / Intro -->
+    <header class="bg-gradient-to-r from-blue-100 to-purple-100 pt-16 pb-16 px-6 rounded-b-[2rem] shadow-sm mb-10 text-center relative overflow-hidden">
+        <div class="max-w-3xl mx-auto relative z-10">
+            <span class="inline-block bg-white px-4 py-1.5 rounded-full text-sm font-bold text-indigo-500 mb-4 shadow-sm uppercase tracking-wide">
+                6 Клас • Інформатика
+            </span>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">
+                Магія Таблиць
+            </h1>
+            <p class="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+                Привіт! Сьогодні ми навчимося створювати зручні та красиві таблиці у текстових документах. Готові перетворити хаос на порядок?
+            </p>
+            <a href="https://docs.google.com/document/" target="_blank" rel="noopener noreferrer" 
+               class="inline-flex items-center gap-2 bg-indigo-500 hover:bg-indigo-600 text-white font-bold text-lg py-3 px-8 rounded-full shadow-lg hover-lift">
+                <span>📝 Відкрити Google Документи</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6">
+
+        <!-- mBot Theory Section -->
+        <section class="mb-12">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6 items-center md:items-start relative">
+                <!-- Character -->
+                <div class="flex-shrink-0 w-24 h-24 bg-pastel-blue rounded-full flex items-center justify-center text-5xl shadow-inner border-4 border-white">
+                    🤖
+                </div>
+                
+                <div class="flex-1">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        Підказки від mBot
+                    </h2>
+                    <p class="text-slate-600 mb-4">Я твій помічник на сьогодні! Ось мої секретні інструкції, які допоможуть тобі виконати завдання:</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-pastel-blue/50 p-4 rounded-2xl">
+                            <h3 class="font-bold text-blue-900 mb-2">➕ Як вставити?</h3>
+                            <p class="text-sm text-blue-800">У верхньому меню натисни <strong>Вставка</strong> ➡️ <strong>Таблиця</strong>. Далі мишкою вибери потрібну кількість рядочків та стовпчиків (наприклад, 6х6).</p>
+                        </div>
+                        <div class="bg-pastel-purple/50 p-4 rounded-2xl">
+                            <h3 class="font-bold text-purple-900 mb-2">🔗 Як об'єднати?</h3>
+                            <p class="text-sm text-purple-800">Виділи мишкою кілька сусідніх клітинок. Натисни <strong>праву кнопку миші</strong> ➡️ вибери <strong>Об'єднати клітинки</strong>.</p>
+                        </div>
+                        <div class="bg-pastel-green/50 p-4 rounded-2xl">
+                            <h3 class="font-bold text-green-900 mb-2">🎨 Як зафарбувати?</h3>
+                            <p class="text-sm text-green-800">Клікни у клітинку. Знайди на панелі інструментів значок <strong>Відерця з фарбою</strong> (Колір тла) та обери колір.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practical Tasks -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-extrabold text-center text-slate-800 mb-3">Твоя місія</h2>
+            <p class="text-center text-slate-600 mb-8 max-w-xl mx-auto">Обери <strong>ОДНЕ</strong> завдання з трьох (залежно від рівня складності, який хочеш підкорити) і створи таблицю у своєму документі.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                
+                <!-- Level 1 -->
+                <div class="bg-emerald-50 rounded-3xl p-6 border-2 border-emerald-200 hover-lift flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-emerald-200 text-emerald-800 font-bold px-4 py-1 rounded-bl-xl text-sm">Рівень 1</div>
+                    <div class="text-4xl mb-4 mt-2">📅</div>
+                    <h3 class="text-xl font-bold text-emerald-900 mb-2">Мій розклад уроків</h3>
+                    <p class="text-emerald-800 text-sm mb-4 font-semibold">Простий та зрозумілий.</p>
+                    <ul class="text-sm text-emerald-700 space-y-3 mb-6 flex-grow">
+                        <li class="flex gap-2"><span>✅</span> <span>Створи таблицю розміром <strong>6 стовпців на 6 рядків</strong>.</span></li>
+                        <li class="flex gap-2"><span>✅</span> <span>Перший рядок (шапку) зафарбуй улюбленим кольором (за допомогою відерця).</span></li>
+                        <li class="flex gap-2"><span>✅</span> <span>Заповни дні тижня від Понеділка до П'ятниці (перший стовпець - номер уроку).</span></li>
+                        <li class="flex gap-2"><span>✅</span> <span>Впиши свої уроки.</span></li>
+                    </ul>
+                </div>
+
+                <!-- Level 2 -->
+                <div class="bg-amber-50 rounded-3xl p-6 border-2 border-amber-200 hover-lift flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-amber-200 text-amber-800 font-bold px-4 py-1 rounded-bl-xl text-sm">Рівень 2</div>
+                    <div class="text-4xl mb-4 mt-2">🍕</div>
+                    <h3 class="text-xl font-bold text-amber-900 mb-2">Меню шкільної їдальні</h3>
+                    <p class="text-amber-800 text-sm mb-4 font-semibold">З об'єднанням категорій.</p>
+                    <ul class="text-sm text-amber-700 space-y-3 mb-6 flex-grow">
+                        <li class="flex gap-2"><span>✅</span> <span>Створи таблицю на 3 стовпці (Категорія, Назва страви, Ціна).</span></li>
+                        <li class="flex gap-2"><span>✅</span> <span>Використай <strong>об'єднання клітинок</strong> по вертикалі або горизонталі для категорій: «Перші страви», «Гарніри», «Напої».</span></li>
+                        <li class="flex gap-2"><span>✅</span> <span>Зафарбуй категорії різними кольорами.</span></li>
+                        <li class="flex gap-2"><span>✅</span> <span>Придумай і впиши смачне меню!</span></li>
+                    </ul>
+                </div>
+
+                <!-- Level 3 -->
+                <div class="bg-rose-50 rounded-3xl p-6 border-2 border-rose-200 hover-lift flex flex-col h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-rose-200 text-rose-800 font-bold px-4 py-1 rounded-bl-xl text-sm">Рівень 3</div>
+                    <div class="text-4xl mb-4 mt-2">🎒</div>
+                    <h3 class="text-xl font-bold text-rose-900 mb-2">Рюкзак героя (RPG)</h3>
+                    <p class="text-rose-800 text-sm mb-4 font-semibold">Складні об'єднання та кольори.</p>
+                    <ul class="text-sm text-rose-700 space-y-3 mb-6 flex-grow">
+                        <li class="flex gap-2"><span>✅</span> <span>Створи ігровий інвентар. Тобі знадобиться таблиця зі складною структурою (багато об'єднань клітинок).</span></li>
+                        <li class="flex gap-2"><span>✅</span> <span>Зроби велику об'єднану комірку для «Зброї» (наприклад, Меч Дракона).</span></li>
+                        <li class="flex gap-2"><span>✅</span> <span>Виділи окремі блоки під «Зілля» та «Броню».</span></li>
+                        <li class="flex gap-2"><span>✅</span> <span>Використай різні кольори заливки (зелений - звичайні предмети, жовтий - рідкісні, фіолетовий - епічні).</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- How to Submit -->
+        <section class="max-w-2xl mx-auto">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-md border-t-8 border-indigo-500">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center text-2xl">
+                        📤
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800">Як здати роботу?</h2>
+                </div>
+                
+                <ol class="space-y-4 text-slate-600 font-medium">
+                    <li class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">1</span>
+                        <p class="pt-1">У верхньому правому куті твого Google Документа натисни велику кнопку <strong class="text-indigo-600 px-1 bg-indigo-50 rounded">Поділитися</strong>.</p>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">2</span>
+                        <p class="pt-1">У поле "Додайте людей і групи" скопіюй та встав цю електронну адресу вчителя:</p>
+                    </li>
+                    <div class="ml-12 bg-slate-100 p-3 rounded-lg border border-slate-200 font-bold text-slate-800 select-all font-mono text-sm inline-block">
+                        anatolii.dudka.tfu@gmail.com
+                    </div>
+                    <li class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">3</span>
+                        <p class="pt-1">Справа від пошти обери права доступу: <strong class="text-indigo-600">Коментатор</strong> або <strong class="text-indigo-600">Редактор</strong>.</p>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold">4</span>
+                        <p class="pt-1">Натисни кнопку <strong class="text-indigo-600 px-1 bg-indigo-50 rounded">Надіслати</strong>. Готово! Ти супер! 🎉</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>
